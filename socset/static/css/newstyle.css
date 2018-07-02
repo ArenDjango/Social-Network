@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css?family=Cuprum|Roboto|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+/*  	font-family: 'Indie Flower', cursive;
+    	font-family: 'Roboto', sans-serif;
+		font-family: 'Ubuntu', sans-serif;
+		font-family: 'Cuprum', sans-serif;    		*/
+
+
+
+.poiskbutton{
+	/*border:none;*/
+	border-right: none;
+	border-bottom: none;
+	border-top: none;
+	border-left: 1px solid silver;
+	cursor: pointer;
+}
+
+
+
+
+
+
+.input-group .input-addon {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  height: 52px;
+  width: 50px;
+}
+
+.imgmsg{
+	height: 35px;
+	width: 35px;
+}
+.imgsend{
+	height: 23px;
+	width: 23px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.input-group .input {
+  padding-bottom: 50px;
+  padding-right: 70px;
+}
+
+
+.userimg{
+	height: 35px;
+	width: 35px;
+}
+
+
+.listvsmg{
+	margin-top: 39px;
+}
+
+.imgfloatleft{
+	float: right;
+	margin-top: -42px;
+	height: 35px;
+	width: 35px;
+}
+
+
+
+/*MENU*/
+
+
+.navbar-light .navbar-nav .active>.nav-link, 
+.navbar-light .navbar-nav .nav-link.active, 
+.navbar-light .navbar-nav .nav-link.show, 
+.navbar-light .navbar-nav 
+.show>.nav-link {
+	color: #2E76B4;
+	/*Cuprum 17.5 or Roboto 16*/
+	/*font-family: 'Roboto', sans-serif;
+	font-size: 16px; */
+	font-family: 'Cuprum', sans-serif;
+	font-size: 17.5px;
+	
+}
+
+i{
+	color: #99B1C6;
+}
+
+.img-small-dropdown{
+	width: 32px;
+	float: left;
+}
+
+@media(max-width: 989px){
+	.tpsml{
+	display: none;
+}
+}
+.tpsml{
+	margin-left: -25px;
+	float: left;
+}
+
+.formsearch{
+
+}
+
+.vvodpoisk{
+	background-color: #F8F9FA;
+	border: none;
+	border-bottom: 1px solid silver;
+	padding: 1px -1px;
+	height: 23px;
+	outline:none;
+}
+.vvodpoisk:hover{
+	background-color: #F8F9FA;
+	border: none;
+	border-bottom: 1px solid silver;
+	padding: 1px -1px;
+	height: 23px;
+	outline:none;
+}
+
+@media(max-width: 1100px){
+	.vvodpoisk{
+	padding: 1px -1px;
+	height: 28px;
+	width: 130px;
+	outline:none;
+}
+}
+
+.poisk{
+	padding: 2px 4px;
+	margin-left: -4.5px;
+	background-color: #F8F9FA;
+	border: none;
+	outline:none;
+}
+.poisk:focus{
+	padding: 2px 4px;
+	margin-left: -4.5px;
+	background-color: #F8F9FA;
+	border: none;
+	outline:none;
+}
+
+
+.icon{
+	color: #54AAE7;	
+	font-family: 'Indie Flower', cursive;
+}
+
+@media(min-width: 983px){
+.navbar{
+	height: 55px;
+}
+}
+
+@media(min-width: 983px){
+.opovisheniya{
+	/*margin-right: px;*/
+}
+}
+@media(max-width: 1100px){
+.nameclass{
+	display: none;
+}
+}
+
+
+.uvidomclass{
+	background-color: #D1D9E0;
+	padding: 1px 5px;
+}
+
+
+
+/*.bg-light{
+	background-color: #81C7F3 !important;
+}*/
+
+
+/*Banner*/
+
+.bannerclass{
+	height: 300px;
+}
+.bannerclass:hover{
+	height: 300px;
+	cursor: pointer;
+}
+
+
+/*MY PAGE*/
+
+.pimg img{
+	width: 300px;
+}
+.pimg{
+	background-color: white;
+	margin-left: 20px;
+	border-radius: 4px;
+}
+
+
+
+.ptop{
+	
+}
+.banner{
+	margin: 20px;
+}
+
+.leftmypage{
+	margin: 20px;
+}
+
+.sitemypage{
+	background-color: #EDEEF0;
+}
+
+
+
+
+.pulclass{
+	list-style-type: none;
+}
+.pulclass li a{
+	color: #4496DD;
+}	
+
+.gorodworkand{
+	color: #99B1C6;
+}
+.pulclass li a:hover{
+	color: black;
+	text-decoration: none;
+	color: #278EE7;
+}
+
+.editprofile{
+	color: #55677D;
+	text-align: center;
+	font-size: 19px;
+	background-color: #DBE4ED;
+	height: 33px;
+}
+.editprofile:hover{
+	color: #55677D;
+	text-align: center;
+	font-size: 19px;
+	background-color: #D2E1EF;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.pname{
+	margin-left: 40px;
+}
+.pname p{
+	font-size: 19px;
+}
+
+
+/* rightpunder*/
+
+
+
+@media(min-width: 789px){
+	.nameandwork{
+	font-family: 'Roboto', sans-serif;
+	background-color: white;
+	border-radius: 4px;
+	margin-left: 25px;
+}
+}
+.nameandwork{
+	font-family: 'Roboto', sans-serif;
+	background-color: white;
+	border-radius: 4px;
+}
+
+
+/*body{
+	height: 2000px;
+}*/
+
+
+.rightpunder{
+	margin: 10px;
+	padding: 20px;
+	background-color: white;
+	font-family: 'Roboto', sans-serif;
+}
+
+
+
+/*FriendsAndUnderImgProfile*/
+
+.FriendsAndUnderImgProfile{
+	margin: 20px;
+	background-color: white;
+}
+
+
+.friendslistp{
+	list-style-type: none;
+}
+
+@media(max-width: 1070px){
+	.bannerclcol{
+		display: none;
+	}
+}
+
+
+/*Profile опять*/
+
+.testimgedit{
+	width: 305px;
+}
+
+@media(max-width: 1013px){
+	.ListFriendsMyProfile{
+	display: none;
+}
+}
+.ListFriendsMyProfile{
+	float: right;
+	background-color: white;
+	padding: 10px;
+}
+
+.listFriendInSite{
+	position: fixed;
+	transform: 3s;
+	width: 300px;
+}
+
+.ListFriendsMyProfile ul{
+	list-style-type: none;
+	margin-right: 20px;
+}
+.ListFriendsMyProfile ul li{
+	list-style-type: none;
+	margin-right: 20px;
+	margin-top: 10px;
+}
+
+.friendssmallimg{
+	height: 50px;
+	border-radius: 50px;
+	border: 1px solid #E9E5E5;
+}
+
+.ViewMoreFriendPR{
+	text-align: center;
+	background-color: #E9E8E8;
+}
+.ViewMoreFriendPR:hover{
+	text-align: center;
+	cursor: pointer;
+	background-color: #DBDBDB;
+	transition: 0.3s;
+}
+
+.icon{
+  position: relative;
+  z-index: 2;
+  transition: 3s linear;
+}
+.icon:hover{
+	-webkit-transform: rotate(360deg) !important;
+  	transform: rotate(360deg) !important;
+}
+
+
+
+
+/*GALERAYA (PHOTO AND VIDEO)*/
+
+.galereya{
+	font-family: 'Cuprum', sans-serif;
+
+}
+
+
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.imgupload{
+	width: 50px;
+	cursor: pointer;
+}
+.titleimage{
+	margin-right: 15px;
+	height: 30px;
+	width: 200px;
+}
+.openfile{
+	border: 1px solid silver;
+	display: flex;
+	float: right;
+	margin-right: 20px;
+	margin-left: 5px;
+}
+
+.checkboxvideo{
+	height: 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.okimage{
+	float: right;
+	margin-right: -350px;
+	margin-top: 20px;
+	border: none;
+	border: 1px solid silver;
+	cursor: pointer;
+}
+
+
+.modal-backdrop.show {
+	opacity: 0;
+}
+
+.modal-backdrop{
+	z-index: 0;
+}
+
+
+
+a{
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: none;
+}
+
+
+.gall{
+	height: 450px;
+
+}
+
+
+
+.likegall{
+	margin-top: -35px;
+	margin-right: 5px;
+	float: right;
+}
+
+.imgnavbar{
+	height: 30px;
+	width: 30px;
+	border-radius: 50px;
+}
+
+
+
+
+
+
+/*LIKE AJAX*/
+
+#formlike button{
+	border: none;
+	background-color: white;
+	cursor: pointer;
+}
+
+#formlike button:focus{
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	outline: none;
+}
+
+#likeBtnAndCount {
+	display: flex;
+}
+#likeBtnAndCount button{
+	margin-top: -14px;
+}

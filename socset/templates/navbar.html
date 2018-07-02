@@ -1,0 +1,212 @@
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="/site/">
+  <div class="icon">
+    FVI
+  </div>
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/profile/">
+          <i class="fas fa-home"></i> Моя Страница<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active">
+
+        <div class="nav-link" href="#">
+
+          <div class="formsearch">
+          <form action="/listusers/" method="GET">
+      <input placeholder="Поиск..." 
+      class="vvodpoisk" id="vvodpoisk" 
+            type="text" name="q">
+      <button id="searchmybtnmy" class="poisk poiskbutton"><i class="fas fa-search"></i></button>
+          </form>
+        <script>
+
+          $(document).ready(function() {
+     $('#searchmybtnmy').attr('disabled','disabled');
+     $('#vvodpoisk').keyup(function() {
+        if($(this).val() != '') {
+           $('#searchmybtnmy').removeAttr('disabled');
+        }
+        else {
+        $('#searchmybtnmy').attr('disabled','disabled');
+        }
+     });
+ });
+
+        </script>
+
+
+
+
+          </div>
+          <span class="sr-only">(current)</span></div>
+
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/site/">
+          <i class="far fa-newspaper"></i> Новости<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/allchat/">
+          <i class="fas fa-comments"></i> Сообщения
+          
+            {% if user.userprofile.messagedo.count > 0 %}
+            <span class="uvidomclass">
+       {{ user.userprofile.messagedo.count }} 
+       </span>
+       {% endif %}
+          
+          <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-user"></i> Друзья<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/foto/">
+          <i class="fas fa-camera"></i> Фотографии<span class="sr-only">(current)</span></a>
+      </li>
+
+    </ul>
+
+    <ul class=" my-2 my-lg-0 navbar-nav mr-auto">
+
+      <li class="nav-item active opovisheniya">
+        <a class="nav-link" href="#">
+          <i class="fas fa-bell" data-toggle="modal" data-target="#myModal"></i>
+          
+          {% if user.userprofile.zayavkadruzya.count > 0 %}
+          <span class="uvidomclass">
+       {{ user.userprofile.zayavkadruzya.count }}
+       </span>
+       {% endif %}
+        
+          <span class="sr-only">(current)</span></a>
+
+      </li>
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">
+      Оповещение ( {{ user.userprofile.zayavkadruzya.count }} )
+      </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+      </div>
+      <div class="modal-body modalscrolling">
+        {% if user.userprofile.zayavkadruzya.count > 0 %}
+        <p>Заявки на добавление в друзья</p>
+        {% else %}
+        <p>Новых Уведомлений нету</p>
+        {% endif %}
+
+        <!--
+        Рабочый метод 
+        {% for d in request.user.userprofile.zayavkadruzya.all %}
+        {{ d.get_full_name }}
+        {% endfor %} -->
+            
+{% for users in zayavka_list %}
+{% if users.user in request.user.userprofile.zayavkadruzya.all %}
+        <p class="usernamekolokol">
+          <div class="listuserdiv">
+           <p>
+            <img style="width: 50px; height: 50px; border-radius: 50px;" class="img-fluid imglistusers" src="{{ users.user.userprofile.avatar.url }}" alt="">
+          <a href="{{ users.user_get_absolute_url }}">
+          {{ users.user.get_full_name }}</a></p>
+
+            <a href="/addfrnavb/{{ users.id }}/">
+            Добавить в друзья
+            </a>
+
+            <br>
+  <!-- <br>
+            <button class="btn btn-warning">
+              Оставить в подписчиках
+            </button>
+            <br> --><br>
+
+            <a href="/remfrnav/{{ users.id }}/">
+            Отклонить заявку
+            </a>
+            
+          
+            
+          </div>
+          <br>
+          <hr>   
+        </p>        
+        {% endif %}
+        {% endfor %}
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div><!-- ../ Модальное окно -->
+
+
+
+
+
+
+
+
+
+
+      <li class="nav-item active nameclass">
+        <a class="nav-link" href="#">
+          {{ user.first_name }}
+          <span class="sr-only">(current)</span></a>
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="fafrrlse">
+        {% if user.userprofile.avatar %}
+          <div class="img-small-dropdown">
+           <!--  <p class="tpsml">Admin</p> -->
+            <img class="img-fluid imgnavbar"
+            src="{{ user.userprofile.avatar.url }}" alt="">
+          </div>
+          {% endif %}
+
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="/profile/">Моя Страница</a>
+          <a class="dropdown-item" href="/settings/">Настройки</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout/">Выход</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

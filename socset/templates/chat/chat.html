@@ -1,0 +1,203 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
+ 
+  {% include 'stylesand.html' %}
+
+    
+     <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+    <title> Chat | FaceVkInsta</title>
+  </head>
+  <body>
+    
+    
+<header>
+    {% include 'navbar.html' %}
+  </header>
+
+<div style="margin-top: 80px;"></div>
+
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+
+          <div>
+            <p>{{ userobjchat.user.get_full_name }} |
+
+      {% if userobjchat.user.userprofile.user_online %}
+          <small style="color: #E58181;"> online</small>
+          {% else %}
+          <small>
+          Бил в сети {{ userobjchat.user.userprofile.last_activity|timesince }} назад
+          </small>
+    {% endif %}
+            </p>
+            {% if userobjchat.user.userprofile.avatar %}
+          <img class="imgfloatleft" 
+          src="{{ userobjchat.user.userprofile.avatar.url }}">
+            {% else %}
+            <img class="imgfloatleft" 
+          src="{% static 'img/default_avatar.png' %}">
+          {% endif %}
+          </div>
+          
+          <div id="msg-list-div" class="messpanel">
+          <div id="messpanelchild">
+            <br>
+
+<!-- id="ul" -->
+            <ul id="msg-list" class="ul list-group" >
+     {% for mess in allmessages %}
+    
+  {% if mess.user == request.user %}
+    {% if mess.useryou == userobjchat.user %}
+     <li class="text-right mymsg">
+                <p class="pright">
+              {{ mess.message }} <br>
+              <small>{{ mess.datamessage|date:"H:i" }} |
+                <a class="menuclassmessage" 
+          href="/chatdel/{{ mess.id }}/">
+            <i class="fas fa-trash-alt"></i>
+          </a>
+              </small>
+               </p>
+            
+
+            </li>
+    
+
+    {% endif %}
+      {% else %}
+
+        {% if mess.user == userobjchat.user %}
+        {% if mess.useryou == request.user %}
+
+              <li class="text-left yourmsg">
+                <p class="pleft">
+              {{ mess.message }}<br>
+              <small>{{ mess.datamessage|date:"H:i" }}</small>
+            </p>
+            </li>
+
+            {% endif %} <!-- mess.useryou = request.user -->
+
+      {% endif %}
+      {% endif %}
+            
+            {% empty %}
+                    <li class="text-right">No messages yet!</li>
+              
+           {% endfor %}
+            </ul>
+
+
+
+            <br>
+          </div>
+          </div> <!-- ../ Mess Panel -->
+          <br>
+          
+
+<form id="chat-form" method="post" 
+action="/post/{{ userobjchat.id }}/">
+            {% csrf_token %}
+            <div id="chat-bottom" class="input-group"> 
+     <textarea id="chat-msg" name="chat-msg"
+     class="input" 
+     wrap="soft | hard" 
+     class="textmessage"></textarea>
+<span class="input-group-btn">
+  <button id="send" type="submit" class="input-addon">
+  <img class="imgsend" src="{% static 'img/send.png' %}" 
+  alt="">
+</button>
+</span>
+</div>
+</form>
+        </div>
+
+
+
+        <div class="col-lg-4">
+
+
+          <ul id="msg-list" class="list-group listvsmg">
+  {% for d in chatstory %}
+{% if d.user in request.user.userprofile.allmessagesstory.all %}
+
+           <li class="list-group-item itemhistorymsg">
+            <a class="aclass" 
+            href="{{ d.user_get_absolute_url }}chat/">
+
+              <img class="usermyimg" 
+      src="{{ d.user.userprofile.avatar.url }}" 
+              alt="">
+            {{ d.user.get_full_name }} 
+ {% if d.user in request.user.userprofile.messagedo.all %}
+<p class="inmessage">
+  Пропущенное сообщение
+</p>
+{% else %}
+
+
+
+{% for msgstory in messagestory %}
+<p class="historymsg">
+
+{% if msgstory.useryou == d.user %}
+{{ msgstory.message|truncatechars:40 }} 
+
+{% endif %}
+
+{% if msgstory.useryou == request.user and msgstory.user == d.user %}
+
+{{ msgstory.message|truncatechars:40 }}
+
+{% endif %}
+
+</p>
+ {% endfor %}
+  
+ 
+{% endif %}
+          
+          </a>
+          </li>
+
+          {% endif %}
+          {% endfor %}
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      {% include 'chat/chat.js' %}
+    </script>
+  
+
+ 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

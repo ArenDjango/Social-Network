@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+     {% include 'stylesand.html' %}
+
+  <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <title>FVI</title>
+  </head>
+  <body>
+  
+  
+
+  <header>
+    {% include 'navbar.html' %}
+  </header>
+ <br> <br>  
+
+
+<div style="background-color: #edeef0;"> <br>
+<div class="container-fluid" style="background-color: #edeef0;">
+     <div class="row">
+      
+
+
+
+
+       <div class="col-md-8">
+{% for image in photos %}
+
+
+        <div class="card mycardgall">
+
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">
+      {% if image.text %}
+    {{ image.text }}
+    {% endif %}
+  </p>
+    <p class="card-text"><small class="text-muted">
+    {{ image.dataimg }}</small></p>
+  </div>
+
+  {% if image.orphotoorvideo %}
+<video class="gall img-fluid videoclassall" src="{{ image.imageuser.url }}" controls="controls"></video>
+{% else %}
+  <img class="gall card-img-bottom" 
+  src="{{ image.imageuser.url }}" alt="Card image cap">
+{% endif %}
+
+
+  <div class="LikeAndName">
+    <p style="margin-top: 13px;">
+      <a href="">
+    {{ image.user.get_full_name }}
+  </a>
+</p>
+
+
+  <div class="likegall">
+  {% if image.user == request.user %}
+  <div id="likeBtnAndCount">
+<p><i class="far fa-thumbs-up"></i>
+
+<p style="margin-left: 6px;" id="likecount">{{ image.photolike.count }}</p>
+        </p>
+</div>
+          {% else %}
+
+
+          <div class="like">
+          <form action="/photo/{{ image.id }}/" 
+method="post" id="formlike"> {% csrf_token %}
+
+  
+<div id="likeBtnAndCount">
+<button type="submit"><i class="far fa-thumbs-up like"></i>
+</button>
+<p id="likecount">{{ image.photolike.count }}</p>
+</div>
+
+          </form>
+            </div>
+
+
+
+
+            {% endif %}
+            </div><!-- ../likeGall -->
+
+  </div><!-- ../ LikeAndName -->
+
+
+
+</div><!-- ../  card mycardgall -->
+ <br>
+
+{% endfor %}
+       </div>
+
+
+
+
+
+
+
+
+
+
+       <div class="col-lg-4 col-md-12">
+
+          <div class="
+          cardmy ListFriendsMyProfile">
+            {% if user.userprofile.friends.count > 0 %}
+            <p>Друзья ({{ user.userprofile.friends.count }})</p>
+            {% else %}
+            <p>Нет друзей <a href="">Найти</a></p>
+            {% endif %}
+            <hr>
+            {% if user.userprofile.friends.count > 0 %}
+          <ul>
+
+            {% for users in zayavka_list %}
+
+{% if users.user in request.user.userprofile.friends.all %}
+{% if not users.user_online %}
+            <li>
+              <a href="{{ users.user_get_absolute_url }}">
+          <img class="friendssmallimg" 
+          src="{{ users.user.userprofile.avatar.url }}" alt="">{{ users.user.get_full_name }}</a> <br>
+    <small>Бил в сети {{ users.last_activity|timesince }} назад
+      </small>
+        </li>
+{% endif %}
+          {% endif %}
+            {% endfor %}
+          
+          </ul>
+          {% endif %}
+
+{% if user.userprofile.friends.count > 0 %}
+          <p>Онлайн</p>
+          <hr>
+          <ul>
+            {% for users in zayavka_list %}
+{% if users.user in request.user.userprofile.friends.all %}
+{% if users.user_online %}
+            <li> <a href="{{ users.user_get_absolute_url }}">
+          <img class="friendssmallimg" src="img/l01.png" alt="">
+        {{ users.user.get_full_name }}</a>
+      <p style="color: #E58181;">online</p>
+        </li>
+          {% endif %}
+          {% endif %}
+
+          {% endfor %}
+
+          </ul>
+          <p class="ViewMoreFriendPR">Посмотреть все</p>
+        {% endif %}
+  
+        </div>
+
+        <script>
+          $(window).scroll(function(){
+        if ($(window).scrollTop() > 250) {
+            $('.cardmy').addClass('listFriendInSite');
+        }
+        else {
+            $('.cardmy').removeClass('listFriendInSite');
+        }
+    });
+        </script>
+        
+       </div>
+     </div>
+    </div>
+
+    </div>
+
+ 
+    
+<script>
+  {% include 'site/site.js' %}
+</script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css?family=Cuprum|Indie+Flower|Italianno|Lato|Roboto');
+
+
+/*
+font-family: 'Cuprum', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Italianno', cursive;
+font-family: 'Lato', sans-serif;
+font-family: 'Indie Flower', cursive;
+*/
+
+/*Font Awesome*/
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
+
+
+.hiddentest{
+	display: none;
+}
+
+.input {
+	resize: none;
+	height: 10px;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+
+}
+
+/*::-webkit-scrollbar { 
+    display: none; 
+}*/
+
+
+button{
+	/*border:none;*/
+	border-right: none;
+	border-bottom: none;
+	border-top: none;
+	border-left: 1px solid silver;
+	cursor: pointer;
+}
+
+#messpanelchild{
+	width: 100%;
+    height: 99%;
+    overflow-y: auto;
+    padding-right: 17px; /* exact value is given in JavaScript code */
+}
+
+@media(min-height: 620px){
+.messpanel{
+	background: url("https://avatanplus.com/files/resources/mid/57ff4af1b2b4a157bd3cc044.png");
+	background-color: #EDE8E8;
+	overflow: hidden;
+	height: 550px;
+}
+}
+@media(max-height: 619px){
+.messpanel{
+	background: url("https://avatanplus.com/files/resources/mid/57ff4af1b2b4a157bd3cc044.png");
+	background-color: #EDE8E8;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 390px;
+}
+}
+
+
+
+.input-group .input-addon {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  height: 52px;
+  width: 50px;
+}
+
+.imgmsg{
+	height: 35px;
+	width: 35px;
+}
+.imgsend{
+	height: 23px;
+	width: 23px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.input-group .input {
+  padding-bottom: 50px;
+  padding-right: 70px;
+}
+
+
+
+
+
+
+/*messages*/
+
+
+small{
+	color: blue;
+}
+
+li .pright{
+	padding: 10px;
+	background-color: #72F4B2;
+	float: right;
+	margin-right: 20px;
+	border-radius: 13px 13px 0px 13px;
+}
+
+
+li .pleft{
+	padding: 10px;
+	background-color: #FB7DFD;
+	float: left;
+	margin-left: 20px;
+	border-radius: 0px 13px 13px 13px;
+}
+.pleft small{
+	float: right;
+	color: #F0F0F0;
+}
+
+/*.text-right{
+	float: right;
+}
+.text-left{
+	float: left;
+}*/
+
+.usermyimg{
+	height: 30px;
+}
+ 
+
+.listvsmg{
+	margin-top: 39px;
+}
+
+.imgfloatleft{
+	float: right;
+	margin-top: -42px;
+	height: 35px;
+	width: 35px;
+}
+
+.aclass{
+	color: black;
+}
+.aclass:hover{
+	color: black;
+	text-decoration: none;
+}
+
+
+.itemhistorymsg{
+	text-overflow: clip;
+	white-space: nowrap;
+	height: 90px;
+	overflow: hidden;
+}
+

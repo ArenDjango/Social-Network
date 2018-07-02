@@ -1,0 +1,164 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+{% include 'stylesand.html' %}
+
+
+
+    <title>FVI</title>
+  </head>
+  <body>
+
+
+
+  <header>
+    {% include 'navbar.html' %}
+  </header>
+ <br> <br>
+
+
+<div style="background-color: #edeef0;"> <br>
+<div class="container-fluid" style="background-color: #edeef0;">
+     <div class="row">
+       <div class="col-lg-4 col-md-6 col-xs-6">
+<div class="cardmy">
+<div class="pimg testimgedit">
+  {% if user.userprofile.avatar %}
+      <img class="img-fluid" src="{{ user.userprofile.avatar.url }}" alt="">
+        
+              <p class="editprofile">
+              <a href="/update/">Сохранить</a>
+            </p>
+        
+              {% endif %}
+            </div>
+</div>
+       </div>
+       <div class="col-lg-4 col-md-5">
+          <div class="cardmy">
+          <div class="nameandwork">
+            <div class="pname">
+              <p>{{ user.get_full_name }}</p>
+            </div> <br>
+            <form class="formtextuseredit" 
+          method="POST" action="." enctype='multipart/form-data'>
+          {% csrf_token %}
+<div class="form-group">
+
+          
+
+<div id="div_id_avatar" class="form-group"> <label for="id_avatar" class="col-form-label  requiredField">
+          <span class="asteriskField"></span> </label> <div class="">
+                    
+
+<input type="file" name="avatar" id="id_avatar" 
+class="clearablefileinput" /> </div> </div> 
+
+
+<div id="div_id_placework" class="form-group"> 
+<label for="id_placework" class="form-control col-form-label  requiredField">
+                Место работы<span class="asteriskField"></span> </label> <div class=""> 
+                <textarea name="placework" id="id_placework"    
+                class="textarea form-control placeworkedit" 
+                required >
+{{ user.userprofile.placework }}
+</textarea> </div> </div> 
+
+
+<div id="div_id_city" class="form-group"> 
+<label for="id_city" class="form-control col-form-label  requiredField">
+                Город<span class="asteriskField"></span> </label> <div class=""> 
+                <textarea name="city" id="id_city" 
+                class="form-control textarea form-control cityedit" 
+                required>
+{{ user.userprofile.city }}
+</textarea> </div> </div>
+
+
+
+
+</div>
+      <input type="submit" value="Сохранить"
+      class="btn btn-primary saveedit">
+      </form>
+
+            </div>
+        </div>
+       </div>
+       <div class="col-lg-4 col-md-12">
+
+          <div class="cardmy ListFriendsMyProfile">
+            {% if user.userprofile.friends.count > 0 %}
+            <p>Друзья ({{ user.userprofile.friends.count }})</p>
+            {% else %}
+            <p>Нет друзей <a href="">Найти</a></p>
+            {% endif %}
+            <hr>
+            {% if user.userprofile.friends.count > 0 %}
+          <ul>
+
+            {% for users in zayavka_list %}
+
+{% if users.user in request.user.userprofile.friends.all %}
+{% if not users.user_online %}
+            <li>
+              <a href="{{ users.user_get_absolute_url }}">
+          <img class="friendssmallimg" 
+          src="{{ users.user.userprofile.avatar.url }}" alt="">{{ users.user.get_full_name }}</a> <br>
+    <small>Бил в сети {{ users.last_activity|timesince }} назад
+      </small>
+        </li>
+{% endif %}
+          {% endif %}
+            {% endfor %}
+          
+          </ul>
+          {% endif %}
+
+{% if user.userprofile.friends.count > 0 %}
+          <p>Онлайн</p>
+          <hr>
+          <ul>
+            {% for users in zayavka_list %}
+{% if users.user in request.user.userprofile.friends.all %}
+{% if users.user_online %}
+            <li> <a href="{{ users.user_get_absolute_url }}">
+          <img class="friendssmallimg" src="img/l01.png" alt="">
+        {{ users.user.get_full_name }}</a>
+      <p style="color: #E58181;">online</p>
+        </li>
+          {% endif %}
+          {% endif %}
+
+          {% endfor %}
+
+          </ul>
+          <p class="ViewMoreFriendPR">Посмотреть все</p>
+        {% endif %}
+  
+        </div>
+       </div>
+     </div>
+    </div>
+
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>

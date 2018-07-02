@@ -1,0 +1,137 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    
+
+    {% include 'stylesand.html' %}
+
+    <title>FVI</title>
+  </head>
+  <body>
+  
+  
+
+  <header>
+    {% include 'navbar.html' %}
+   </header>
+ <br> <br>  
+
+
+<div style="background-color: #edeef0;"> <br>
+<div class="container-fluid" style="background-color: #edeef0;">
+     <div class="row">
+       <div class="col-lg-4 col-md-6 col-xs-6">
+<div class="cardmy">
+  {% if user.userprofile.avatar %}
+<div class="pimg testimgedit">
+
+              <img class="img-fluid" 
+              src="{{ user.userprofile.avatar.url }}" alt="">
+         
+              <p class="editprofile">Редактировать</p>
+            </div>
+            {% else %}
+            <div class="pimg testimgedit">
+
+              <img class="img-fluid" 
+              src="{% static 'img/default_avatar.png' %}" alt="">
+         
+              <p class="editprofile">Редактировать</p>
+            </div>
+            {% endif %}
+</div>
+       </div>
+      
+       <div class="col-lg-8">
+
+        <h2 class="galereya text-info">Галерея</h2>
+         
+         <form action="" method="POST" 
+         enctype='multipart/form-data'>
+          {% csrf_token %}
+        <div class="openfile">
+          <input name="text"  class="titleimage" type="text" 
+          placeholder="Что у вас нового ?" 
+          required id="id_text">
+          <p class="videoorno">Видео</p>
+
+  <input name="orphotoorvideo" 
+  class="checkboxvideo" 
+  type="checkbox" id="id_orphotoorvideo">
+  <input type="file" name="imageuser" 
+  id="file" class="inputfile"
+  required id="id_imageuser" />
+<label for="file">
+  <img class="imgupload" 
+  src="{% static 'img/upload.png' %}" alt="">
+</label> <br>
+
+       </div> <br> <br>
+<input class="okimage" type="submit" value="Загружать">
+       <br> <br>
+     </form>
+     
+       <hr>
+      
+
+
+{% for image in photos %}
+{% if image.user == request.user %}
+        <div class="card">
+  <div class="card-body">
+    <h5 class="card-title"></h5>
+    <p class="card-text">
+      {% if image.text %}
+    {{ image.text }}
+    {% endif %}
+  </p>
+    <p class="card-text"><small class="text-muted">
+      {{ image.dataimg }}
+    </small></p>
+  </div>
+{% if image.orphotoorvideo %}
+<video class="img-fluid videoclassall" src="{{ image.imageuser.url }}" controls="controls"></video>
+{% else %}
+  <img style="height: 300px;" class="card-img-bottom" 
+  src="{{ image.imageuser.url }}" alt="Card image cap">
+{% endif %}
+  <div>
+    <p style="margin-top: 13px;"><a href="">
+   {{ request.user.get_full_name }}
+  </a></p>
+
+<p style="float: right; margin-right: 5px; margin-top: -40px;">
+    <i class="fas fa-thumbs-up"></i> 
+    {{ image.photolike.count }}
+  </p>
+  </div>
+</div>     <br>  
+{% endif %}
+{% endfor %}
+
+
+  
+       </div>
+     </div>
+    </div>
+
+    </div>
+
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>
